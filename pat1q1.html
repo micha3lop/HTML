@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment Form</title>
+</head>
+<body style="background-color: beige;">
+    <form action="personal" method="post">
+        <fieldset>
+            <h1>Personal Information</h1>
+            <label for="fullname">Full Name: <sup style="color: red;">*</sup></label><br>
+            <input type="text"name="fullname" id="fullname" required><br><br>
+            <label for="id">Student ID:  <sup style="color: red;">*</sup></label><br>
+            <input type="text" pattern="alphanumeric" id="id" name="id" required><br><br>
+            <label for="email">Email: <sup style="color: red;">*</sup></label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="year">Year of study:</label><br>
+            <input type="radio" name="year" id="1st" value="1st">
+            <label for="1st">1st Year</label>
+            <input type="radio" name="year" id="2nd" value="2nd">
+            <label for="1st">2nd  Year</label>
+            <input type="radio" name="year" id="3rd" value="3rd">
+            <label for="1st">3rd Year</label>
+            <input type="radio" name="year" id="finalyear" value="finalyear">
+            <label for="finalyear">Final Year</label>
+        </fieldset>
+        <hr width="100%">
+        <fieldset>
+            <h1>Academic Details</h1><br>
+            <label for="department">Department:</label>
+            <select name="department" id="department"><br>
+                <option value="" selected disabled>Select Department</option>
+                <option value="CSE" >CSE</option>
+                <option value="ECM" >ECM</option>
+                <option value="MECh" >MECH</option>
+                <option value="CIVIL" >CIVIL</option>
+            </select><br><br>
+            <label for="courses">Available Courses:</label><span style="opacity: 50%;">(Click Ctrl and Select for Multiple Options)</span><br>
+            <select name="courses" id="courses" multiple>
+                <option value="" selected disabled>Select Course</option>
+                <option value="python" >Python</option>
+                <option value="C++" >C++</option>
+                <option value="html" >HTML</option>
+                <option value="java" >JAVA</option>
+            </select>
+        </fieldset>
+        <hr width="100%">
+        <fieldset>
+            <h1>Additional Information</h1>
+            <label for="purpose">Statement of Purpose:</label><br>
+            <textarea name="purpose" id="purpose" placeholder="Maxlength 300" maxlength="300"></textarea><br><br>
+            <label for="idproof">Upload Student ID:<sup style="color: red;">*</sup></label>
+            <span style="opacity: 50%;">(PDF or JPG Format)</span>
+            <input type="file" name="idproof" id="idproof" required>
+            <br><br>
+            <label for="mode">Preferred Mode of Study:</label><br>
+            <input type="radio" name="mode" id="online">
+            <label for="online">Online</label>
+            <input type="radio" name="mode" id="Offline">
+            <label for="online">Offline</label><br><br>
+            <label for="online">Accept Terms & Conditions<sup style="color: red;">*</sup></label>
+            <input type="checkbox" name="mode" id="online">
+        </fieldset>
+        <br>
+        <input type="submit" name="sumbit" id="sumbit" style="height: 30px; width: 100px;">
+        <input type="reset" name="reset" id="reset" style="height: 30px; width: 100px;">
+
+
+    </form>
+</body>
+</html>
