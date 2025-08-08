@@ -1,0 +1,61 @@
+.div{
+    height: 300px;
+    width: 400px;
+    background-color: rgba(0, 4, 255, 0.445);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.459);
+    border-radius: 8%;
+    transition: all 0s ease-in-out;
+}
+.div:hover{
+    transform: scale(1.08);
+    transform: scale3d(2.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.459);
+    cursor: pointer;
+}
+.h1{
+    text-align: center;
+    align-content: center;
+    color: rgb(0, 0, 0);
+}
+.img{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 20px;
+}
+.h2{
+    text-align: center;
+    align-content: center;
+    color: rgb(255, 255, 255);
+
+}
+.div2{
+    height: 300px;
+    width: 400px;
+    background-color: rgba(255, 0, 0, 0.699);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.459);
+    border-radius: 8%;
+    transition: all 0s ease-in-out;
+}
+.div2:hover{
+    transform: scale(1.04);
+    transform: scale3d(2.01);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.459);
+    cursor: pointer;
+}
+.h22{
+    text-align: center;
+    align-content: center;
+    color: rgb(255, 255, 255);
+
+}
+.h12{
+    text-align: center;
+    align-content: center;
+    color: rgb(0, 0, 0);
+}
