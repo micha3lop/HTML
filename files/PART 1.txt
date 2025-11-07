@@ -1,0 +1,186 @@
+Q1
+
+<?php
+$color=array('white','green','red','blue','black');
+echo("The memory of that scene for me is like a frame of film forever at that moment: the $color[2] carpet, the $color[1] lawn, the $color[1], the leaden sky. The new president and his first lady. - Richard M. Nixon")
+?>
+
+Q2
+
+<?php
+$color=array('white','green','red');
+echo '<ul>';
+    echo '<li>' .$color[1]. '</li>';
+    echo '<li>' .$color[2]. '</li>';
+    echo '<li>' .$color[0]. '</li>';
+
+?>
+
+Q3
+
+<?php
+$ceu = array( "Italy"=>"Rome", "Luxembourg"=>"Luxembourg", "Belgium"=>
+"Brussels", "Denmark"=>"Copenhagen", "Finland"=>"Helsinki", "France" =>
+"Paris", "Slovakia"=>"Bratislava", "Slovenia"=>"Ljubljana", "Germany" =>
+"Berlin", "Greece" => "Athens", "Ireland"=>"Dublin",
+"Netherlands"=>"Amsterdam", "Portugal"=>"Lisbon", "Spain"=>"Madrid",
+"Sweden"=>"Stockholm", "United Kingdom"=>"London", "Cyprus"=>"Nicosia",
+"Lithuania"=>"Vilnius", "Czech Republic"=>"Prague", "Estonia"=>"Tallin",
+"Hungary"=>"Budapest", "Latvia"=>"Riga", "Malta"=>"Valetta", "Austria" =>
+"Vienna", "Poland"=>"Warsaw") ;
+asort($ceu);
+foreach($ceu as $country=>$capital){
+    echo "The capital of $country is $capital<br>";
+}
+?>
+
+Q4
+
+<?php
+$x=array(1,2,3,4,5);
+var_dump($x);
+unset($x[3]);
+$x= array_values($x);
+echo "<br>";
+var_dump($x);
+
+Q5
+
+<?php
+$color = array(4 => 'white', 6 => 'green', 11=> 'red');
+$value=current($color);
+echo "$value";
+?>
+
+Q6
+
+<?php
+$json = '{
+    "Title": "The Cuckoos Calling",
+    "Author": "Robert Galbraith",
+    "Detail": {
+        "Publisher": "Little Brown"
+    }
+}';
+$data = json_decode($json, true);
+echo "Title : " . $data["Title"] . "<br>";
+echo "Author : " . $data["Author"] . "<br>";
+echo "Publisher : " . $data["Detail"]["Publisher"];
+?>
+
+Q7
+
+<?php
+$array=array(1,2,3,4,5);
+
+echo "Original Array:<br>";
+foreach($array as $value){
+    echo $value ." "; 
+}
+echo "<br>";
+
+$pos=3;
+array_splice($array,$pos,0,'$');
+echo "After inserting '$' the array is:<br>";
+foreach($array as $value){
+    echo $value ." "; 
+}
+?>
+
+Q8
+
+<?php
+$people=array("Sophia"=>"31","Jacob"=>"41","William"=>"39","Ramesh"=>"40");
+asort($people);
+echo "a) Ascending order sort by value:<br>";
+foreach ($people as $name => $age) {
+    echo "$name => $age<br>";
+}
+echo "<br>";
+ksort($people);
+echo "b) Ascending order sort by key:<br>";
+foreach ($people as $name => $age) {
+    echo "$name => $age<br>";
+}
+
+echo "<br>";
+
+arsort($people);
+echo "c) Descending order sort by value:<br>";
+foreach ($people as $name => $age) {
+    echo "$name => $age<br>";
+}
+echo "<br>";
+
+krsort($people);
+echo "d) Descending order sort by key:<br>";
+foreach ($people as $name => $age) {
+    echo "$name => $age<br>";
+}
+?>
+
+Q9
+
+<?php
+$temps = array(78, 60, 62, 68, 71, 68, 73, 85, 66, 64, 76, 63, 75, 76, 
+               73, 68, 62, 73, 72, 65, 74, 62, 62, 65, 64, 68, 73, 75, 79, 73);
+
+$average = array_sum($temps) / count($temps);
+echo "Average Temperature is : " . round($average, 1) . "<br>";
+
+sort($temps);
+
+$lowest = array_slice($temps, 0, 5);
+$highest = array_slice($temps, -5);
+
+echo "List of seven lowest temperatures : ";
+foreach ($lowest as $temp) {
+    echo $temp . " ";
+}
+echo "<br>";
+
+echo "List of seven highest temperatures : ";
+foreach ($highest as $temp) {
+    echo $temp . " ";
+}
+?>
+
+Q10
+
+<?php
+$array1 = array(array(77, 87), array(23, 45));
+$array2 = array("w3resource", "com");
+
+$result = array();
+
+for ($i = 0; $i < count($array1); $i++) {
+    $result[$i] = array_merge(array($array2[$i]), $array1[$i]);
+}
+
+echo "<pre>";
+print_r($result);
+echo "</pre>";
+?>
+
+Q11
+
+<?php
+$Color = array('A' => 'Blue', 'B' => 'Green', 'c' => 'Red');
+
+$lowercase = array_map('strtolower', $Color);
+echo "Values are in lower case.<br>";
+print_r($lowercase);
+
+echo "<br><br>";
+
+$uppercase = array_map('strtoupper', $Color);
+echo "Values are in upper case.<br>";
+print_r($uppercase);
+?>
+
+Q12
+
+<?php
+$divisible_by_4 = array_filter(range(200, 250), fn($n) => $n % 4 === 0);
+echo implode(",", $divisible_by_4);
+?>
