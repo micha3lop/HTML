@@ -1,0 +1,282 @@
+🧩 1. Cookie-Based Visit Counter
+<?php
+if (isset($_COOKIE['visits'])) {
+    $count = $_COOKIE['visits'] + 1;
+} else {
+    $count = 1;
+}
+setcookie('visits', $count, time() + 3600); // expires in 1 hour
+?>
+<!DOCTYPE html>
+<html>
+<head><title>Visit Counter</title></head>
+<body>
+    <h2>Cookie-Based Visit Counter</h2>
+    <p>Welcome! You have visited this page <?php echo $count; ?> times.</p>
+</body>
+</html>
+
+🧩 2. Session-Based Login Authentication
+
+File: login.php
+
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+    <h2>Login Form</h2>
+    <form method="post" action="login_check.php">
+        Username: <input type="text" name="user"><br><br>
+        Password: <input type="password" name="pass"><br><br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+</html>
+
+
+File: login_check.php
+
+<?php
+session_start();
+if ($_POST['user'] == "admin" && $_POST['pass'] == "1234") {
+    $_SESSION['user'] = "admin";
+    header("Location: welcome.php");
+} else {
+    echo "Invalid credentials.";
+}
+?>
+
+
+File: welcome.php
+
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit;
+}
+echo "<h2>Welcome, ".$_SESSION['user']."!</h2>";
+?>
+
+🧩 3. Remember Me Functionality with Cookies
+<!DOCTYPE html>
+<html>
+<head><title>Remember Me</title></head>
+<body>
+<form method="post">
+    Username: <input type="text" name="username" 
+        value="<?php echo $_COOKIE['username'] ?? ''; ?>"><br><br>
+    <input type="checkbox" name="remember"> Remember Me<br><br>
+    <input type="submit" value="Login">
+</form>
+
+<?php
+if (isset($_POST['remember'])) {
+    setcookie('username', $_POST['username'], time() + 3600*24);
+    echo "Welcome, " . $_POST['username'];
+} else {
+    echo "Welcome, " . ($_COOKIE['username'] ?? 'Guest');
+}
+?>
+</body>
+</html>
+
+🧩 4. Simple CAPTCHA Generator
+
+File: captcha.php
+
+<?php
+session_start();
+$captcha = rand(1000,9999);
+$_SESSION['captcha'] = $captcha;
+
+$image = imagecreate(70,30);
+$bg = imagecolorallocate($image,255,255,255);
+$text = imagecolorallocate($image,0,0,0);
+imagestring($image,5,10,5,$captcha,$text);
+
+header("Content-type: image/png");
+imagepng($image);
+?>
+
+
+File: captcha_form.php
+
+<?php session_start(); ?>
+<form method="post" action="verify.php">
+    <img src="captcha.php"><br><br>
+    Enter CAPTCHA: <input type="text" name="captcha_input"><br><br>
+    <input type="submit" value="Verify">
+</form>
+
+
+File: verify.php
+
+<?php
+session_start();
+if ($_POST['captcha_input'] == $_SESSION['captcha']) {
+    echo "CAPTCHA Verified Successfully!";
+} else {
+    echo "Invalid CAPTCHA.";
+}
+?>
+
+🧩 5. Upload and Display Image
+<!DOCTYPE html>
+<html>
+<head><title>Upload Image</title></head>
+<body>
+<h2>Upload an Image</h2>
+<form method="post" enctype="multipart/form-data">
+    Select Image: <input type="file" name="file"><br><br>
+    <input type="submit" value="Upload">
+</form>
+
+<?php
+if (isset($_FILES['file'])) {
+    move_uploaded_file($_FILES['file']['tmp_name'], "uploads/" . $_FILES['file']['name']);
+    echo "<h3>Uploaded Image:</h3>";
+    echo "<img src='uploads/" . $_FILES['file']['name'] . "' width='200'>";
+}
+?>
+</body>
+</html>
+
+🧩 6. Draw Rectangle Using GD
+<?php
+$img = imagecreate(200,200);
+$bg = imagecolorallocate($img,255,255,255);
+$red = imagecolorallocate($img,255,0,0);
+imagerectangle($img,50,50,150,150,$red);
+header("Content-type:image/png");
+imagepng($img);
+?>
+
+🧩 7. Add Text on an Image (Watermark)
+<?php
+$img = imagecreatefromjpeg("sample.jpg");
+$color = imagecolorallocate($img,0,0,255);
+imagestring($img,5,10,10,"VIT Chennai",$color);
+header("Content-type:image/jpeg");
+imagejpeg($img);
+?>
+
+🧩 8. Image Resizing and Scaling
+<?php
+$src = imagecreatefromjpeg("image.jpg");
+$new = imagescale($src, 200, 150);
+header("Content-type:image/jpeg");
+imagejpeg($new);
+?>
+
+🧩 9. Random Colored Circles
+<?php
+$img = imagecreate(250,250);
+for($i=0;$i<10;$i++){
+    $color = imagecolorallocate($img, rand(0,255), rand(0,255), rand(0,255));
+    imagefilledellipse($img, rand(20,200), rand(20,200), 50, 50, $color);
+}
+header("Content-type:image/png");
+imagepng($img);
+?>
+
+🧩 10. Send Email
+<?php
+$to = "receiver@example.com";
+$subject = "Test Email";
+$message = "This is a test email from PHP.";
+$headers = "From: admin@example.com";
+
+if(mail($to, $subject, $message, $headers))
+    echo "Mail sent successfully.";
+else
+    echo "Mail failed.";
+?>
+
+🧩 11. Gradient Image
+<?php
+$img = imagecreate(200,200);
+for($i=0;$i<200;$i++){
+    $col = imagecolorallocate($img,$i,$i,255);
+    imageline($img,$i,0,$i,200,$col);
+}
+header("Content-type:image/png");
+imagepng($img);
+?>
+
+🧩 12. Dynamic Banner
+<?php
+$img = imagecreate(400,60);
+$bg = imagecolorallocate($img,240,240,240);
+$black = imagecolorallocate($img,0,0,0);
+$text = "Generated on " . date("H:i:s");
+imagestring($img,5,10,20,$text,$black);
+header("Content-type:image/png");
+imagepng($img);
+?>
+
+
+🧩 13. Personalized Greeting Using Session
+<?php
+session_start();
+if (!isset($_SESSION['name'])) {
+    $_SESSION['name'] = "Student";
+}
+echo "Hello, " . $_SESSION['name'] . "! Welcome to the PHP Lab.";
+?>
+
+
+🧩 14. Simple Contact Form
+<!DOCTYPE html>
+<html>
+<head><title>Contact Form</title></head>
+<body>
+<form method="post">
+    To: <input type="text" name="to" value="example@domain.com"><br><br>
+    Subject: <input type="text" name="sub"><br><br>
+    Message: <textarea name="msg"></textarea><br><br>
+    <input type="submit" value="Send Mail">
+</form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $to = $_POST['to'];
+    $sub = $_POST['sub'];
+    $msg = $_POST['msg'];
+    $headers = "From: user@domain.com";
+
+    if (mail($to, $sub, $msg, $headers))
+        echo "Mail Sent!";
+    else
+        echo "Mail Failed!";
+}
+?>
+</body>
+</html>
+
+🧩 15. Feedback Form with Session and Email
+<?php
+session_start();
+$_SESSION['user'] = $_SESSION['user'] ?? "Guest";
+?>
+<!DOCTYPE html>
+<html>
+<head><title>Feedback</title></head>
+<body>
+<h2>Feedback Form</h2>
+<form method="post">
+    Enter Feedback:<br>
+    <textarea name="feedback"></textarea><br><br>
+    <input type="submit" value="Send Feedback">
+</form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $name = $_SESSION['user'];
+    $msg = "Feedback from $name: " . $_POST['feedback'];
+    mail("admin@vit.ac.in", "Student Feedback", $msg, "From: noreply@vit.ac.in");
+    echo "Thank you, $name. Feedback sent!";
+}
+?>
+</body>
+</html>
